@@ -1,0 +1,63 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import biscoito from "./assets/biscoito.png";
+import biscoitoAberto from "./assets/biscoitoAberto.png";
+const frasesDesmotivacionais = [
+  "A vida é curta. Mas a fila do banco é longa.",
+  "Se a vida te der limões, jogue de volta e exija chocolate.",
+  "Todo mundo é um gênio. Mas se você julgar um peixe pela sua habilidade de subir em árvores, ele vai passar a vida inteira pensando que é um idiota.",
+  "O otimismo é a fé que leva à desilusão.",
+  "Sonhe pequeno! Assim você não se decepciona tanto.",
+  "O fracasso é o primeiro passo para o sucesso. Mas é também o último passo para a maioria das pessoas.",
+  "Acredite em si mesmo... a menos que você seja um idiota.",
+  "Se a vida te derrubar, é melhor preparar o colchão.",
+  "O importante é participar... a menos que você não consiga nem isso.",
+  "Não se preocupe com o amanhã. Pode ser que você não chegue lá mesmo.",
+  "Trabalhe duro e em silêncio, deixe seu sucesso fazer barulho. Ou não, porque ninguém vai ouvir.",
+  "Se não for para ser infeliz, eu nem saio da cama.",
+  "A felicidade é uma ilusão. Assim como o trabalho em equipe.",
+  "Não se preocupe, ninguém está prestando atenção em você... e isso é bom.",
+  "A única coisa mais triste do que não ter um sonho é acordar para ele.",
+  "Você nunca sabe o que vai encontrar. Mas geralmente é um dia comum e sem graça.",
+  "A vida é como um jogo de xadrez: você é o peão e sempre acaba sendo sacrificado.",
+  "Todo esforço vale a pena... exceto quando não vale.",
+  "Se você não sabe o que fazer da vida, não se preocupe. Ninguém sabe.",
+  "Desistir é para os fracos. Então, seja forte e desista com estilo!",
+  "Às vezes, tudo o que você precisa é de um bom sono... e um plano B."
+];
+export default function App() {
+  const [img, setImage] = useState(biscoito);
+  const [frase, setFrase] = useState('');
+
+  function abrirBiscoito(){
+    const index = Math.floor(Math.random() * frasesDesmotivacionais.length);
+    //alert(frasesDesmotivacionais[index])
+    setImage(biscoitoAberto)
+    setFrase(frasesDesmotivacionais[index])
+  }
+  function fecharBiscoito(){
+    setImage(biscoito);
+    setFrase('');
+  }
+  
+
+  return (
+    <View style={styles.container}>
+      <Image
+        source={img}
+        style={styles.img}
+      />
+      <Text style={styles.textofrase}> {frase} </Text>
+      <TouchableOpacity style={styles.botao} onPress={abrirBiscoito}>
+        <View style={styles.btnArea}>
+          <Text style={styles.btnTexto}>Clique no pitoco e teste a sua sorte!</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.botao, { marginTop: 15, borderColor: '#121212' }]} onPress={fecharBiscoito}>
+        <View style={styles.btnArea}>
+          <Text style={[styles.btnTexto, { color: 'green' }]}>Reiniciar</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+}
